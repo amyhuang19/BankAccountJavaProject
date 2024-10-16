@@ -21,27 +21,26 @@ public class Main {
 			
 			//Create an account (if need) and get the account holder name
 			String createAccountQuestion;
-			System.out.println("Would you like to create an account (y/n): ");
+			System.out.print("Would you like to create an account (y/n): ");
 			createAccountQuestion = scanner.next();
+            scanner.nextLine(); //Consume leftover newline character: used to prevent scanner confusion
 			if (createAccountQuestion.equals("y")) { //create a new account
-				System.out.println("Enter new account holder name.");
-				accountName = scanner.nextLine();
-				//set initial values of account
+				System.out.print("Enter new account holder name: ");
+				accountName = scanner.next();
 				accountNumCount++;
 				BankAccount newAccount = new BankAccount(accountNumCount, accountName, 0);
 				//put new account into HashMap
 				accounts.put(newAccount.getAccountNumber(), newAccount);
-				System.out.println("New account created. Account number: " + newAccount.getAccountNumber());
+				System.out.println("New account for " + accountName + " created. Account number: " + newAccount.getAccountNumber());
 				accountNumber = newAccount.getAccountNumber();
 			} else if (createAccountQuestion.equals("n")) {
-				System.out.println("Accessing exisitng account.");
-				System.out.println("Please Enter account number: ");
+				System.out.print("Accessing exisitng account. Please Enter account number: ");
 				int tempAccountNum = scanner.nextInt();
 				//check if account number exists
 				if (accounts.containsKey(tempAccountNum)) { //account exists
 					accountName = accounts.get(tempAccountNum).getAccountHolderName();
 					accountNumber = tempAccountNum;
-                    System.out.println("Account of " + accountName + " is valid.");
+                    System.out.println("Welcome " + accountName + ", your account is valid.");
 				} else { //account does not exist
                     scanner.close();
 					continueMenu = false;
@@ -55,14 +54,15 @@ public class Main {
 
 			//ask to make a deposit
 			String makeDepositQuestion;
-			System.out.println("Would you like to make a deposit (y/n): ");
+			System.out.print("Would you like to make a deposit (y/n): ");
 			makeDepositQuestion = scanner.next();
+            scanner.nextLine(); //Consume leftover newline character: used to prevent scanner confusion
 			if (makeDepositQuestion.equals("y")) {
 				//get amount to deposit
 				int depositAmount;
-				System.out.println("Enter amount to deposit: ");
+				System.out.print("Enter amount to deposit: ");
 				depositAmount = scanner.nextInt();
-		
+                scanner.nextLine(); //Consume leftover newline character: used to prevent scanner confusion
 				//deposit the amount
 				BankAccount account = accounts.get(accountNumber);
 				account.depositing(depositAmount);
@@ -76,14 +76,15 @@ public class Main {
 			
 			//ask to make a withdrawal
 			String makeWithdrawalQuestion;
-			System.out.println("Would you like to make a withdrawal (y/n): ");			
+			System.out.print("Would you like to make a withdrawal (y/n): ");		
 			makeWithdrawalQuestion = scanner.next();
+            scanner.nextLine(); //Consume leftover newline character: used to prevent scanner confusion
 			if (makeWithdrawalQuestion.equals("y")) {
 				//get amount to withdraw
 				int withdrawalAmount;
-				System.out.println("Enter amount to withdraw: ");
+				System.out.print("Enter amount to withdraw: ");
 				withdrawalAmount = scanner.nextInt();
-				
+                scanner.nextLine(); //Consume leftover newline character: used to prevent scanner confusion
 				//withdraw the amount
 				BankAccount account = accounts.get(accountNumber);
 				account.withdrawing(withdrawalAmount);
@@ -97,8 +98,9 @@ public class Main {
 
 			//ask to continue to use the menu
 			String continueBanking;
-			System.out.println("Would you like to use the banking system again (y/n): ");
-			continueBanking = scanner.next();	
+			System.out.print("Would you like to use the banking system again (y/n): ");
+			continueBanking = scanner.next();
+            scanner.nextLine(); //Consume leftover newline character: used to prevent scanner confusion
 			if (continueBanking.equals("y")) {
 				System.out.println("Okay, starting over... ");
 			} else if(continueBanking.equals("n")) {

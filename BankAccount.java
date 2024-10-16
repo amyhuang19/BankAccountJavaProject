@@ -37,7 +37,7 @@ public class BankAccount{
 
 	public void withdrawing(int amount) {
 		if (amount > balance) {
-			throw new IllegalArgumentException("Withdrawal amount cannot be greater than balance.");
+			throw new IllegalArgumentException("Withdrawal amount cannot be greater than your balance of " + balance + ".");
 		} else {
 			this.balance = this.balance - amount;
 			System.out.println("Withdrawal sucessful. Current balance: " + balance + ".");
